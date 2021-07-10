@@ -1,8 +1,17 @@
 import React from 'react';
 import NoteItem from './NoteItem';
 import { connect } from 'react-redux';
+import { getAllUsersAction } from '../actions/userActions';
 
-class NoteList extends React.Component{ 
+class NoteList extends React.Component{
+  constructor(props){
+    super(props)
+} 
+
+componentDidMount(){//display all users when the component mounts
+  this.props.getAllUsersAction()
+}
+  
   render(){
   return (
     <div className="wrap">
@@ -21,5 +30,8 @@ const mapStateToProps = (state) =>{
   usersData: state.users
 }
 }
+const mapDispatchToProps = {
+  getAllUsersAction,
+}
 
-export default connect (mapStateToProps)(NoteList);
+export default connect (mapStateToProps, mapDispatchToProps)(NoteList);
